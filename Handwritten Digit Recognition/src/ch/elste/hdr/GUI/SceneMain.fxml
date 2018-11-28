@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="800.0" prefWidth="753.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.elste.hdr.GUI.SceneMainController">
+   <top>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="true" text="_File">
+                  <items>
+                        <MenuItem mnemonicParsing="false" onAction="#newFile" text="New..." />
+                        <MenuItem mnemonicParsing="false" onAction="#newDefault" text="New from Default" />
+                        <MenuItem mnemonicParsing="false" onAction="#open" text="Open..." />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                    <MenuItem mnemonicParsing="false" onAction="#save" text="Save" />
+                        <MenuItem mnemonicParsing="false" onAction="#saveAs" text="Save As..." />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="true" text="_Edit">
+                  <items>
+                        <MenuItem mnemonicParsing="false" onAction="#openInfo" text="Open Information..." />
+                  </items>
+                </Menu>
+                  <Menu mnemonicParsing="true" text="_View">
+                    <items>
+                        <Menu mnemonicParsing="false" text="Themes">
+                           <items>
+                              <RadioMenuItem fx:id="themeChoosableLight" mnemonicParsing="false" onAction="#setTheme" selected="true" text="Light">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="themeGroup" />
+                                 </toggleGroup>
+                              </RadioMenuItem>
+                              <RadioMenuItem fx:id="themeChoosableDark" mnemonicParsing="false" onAction="#setTheme" text="Dark" toggleGroup="$themeGroup" />
+                           </items>
+                        </Menu>
+                    </items>
+                  </Menu>
+              </menus>
+            </MenuBar>
+         </children>
+      </VBox>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER_RIGHT" prefWidth="753.0" spacing="25.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" spacing="4.0">
+               <children>
+                  <Label text="Error Rate:" />
+                  <Label fx:id="errorRateValueLabel" text="temp" />
+               </children>
+            </HBox>
+            <Separator orientation="VERTICAL" />
+            <HBox alignment="CENTER" layoutX="214.0" layoutY="20.0" spacing="4.0">
+               <children>
+                  <Label text="Total numbers looked at:" />
+                  <Label fx:id="triesCountTotal1" text="temp" />
+               </children>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="10.0" left="25.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+   </bottom>
+   <left>
+      <TitledPane animated="false" text="Training Data Information" BorderPane.alignment="TOP_CENTER">
+         <content>
+            <VBox alignment="TOP_CENTER" spacing="4.0">
+               <children>
+                  <HBox alignment="CENTER" spacing="2.0">
+                     <children>
+                        <Label text="Current Number: " />
+                        <Label fx:id="numberValueLabel" text="temp" />
+                     </children>
+                     <padding>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                     </padding>
+                  </HBox>
+                  <CheckBox fx:id="numberDrawable" mnemonicParsing="false" selected="true" text="Draw current number" />
+                  <Canvas fx:id="numberCanvas" height="280.0" width="280.0" />
+                  <HBox alignment="CENTER" spacing="4.0">
+                     <children>
+                        <Button fx:id="animationPrevButton" contentDisplay="CENTER" mnemonicParsing="false" text="Previous" />
+                        <Button fx:id="animationPlayButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Play" />
+                        <Button fx:id="animationNextButton" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" text="Next" />
+                     </children>
+                  </HBox>
+                  <Label text="Input:" />
+                  <Canvas fx:id="inputCanvas" height="280.0" width="280.0" />
+                  <HBox alignment="CENTER" spacing="4.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#resetInputCanvas" text="Reset" />
+                        <Button mnemonicParsing="false" onAction="#guessInputCanvas" text="Guess" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </padding>
+            </VBox>
+         </content>
+      </TitledPane>
+   </left>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <TitledPane fx:id="infoPane" animated="false" text="Network Information">
+               <content>
+                  <VBox>
+                     <children>
+                        <GridPane vgap="5.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="155.0" prefWidth="155.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label fx:id="nodeCountOutput" text="temp" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <HBox spacing="10.0">
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </HBox>
+                              <Label text="Total numbers looked at:" GridPane.rowIndex="3" />
+                              <Label fx:id="triesCountTotal" text="temp" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label text="Output Nodes:" GridPane.rowIndex="2" />
+                              <Label fx:id="nodeCountHidden" text="temp" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label text="Hidden Nodes:" GridPane.rowIndex="1" />
+                              <Label text="Input Nodes:" />
+                              <Label fx:id="nodeCountInput" text="temp" GridPane.columnIndex="1" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </GridPane>
+                     </children>
+                  </VBox>
+               </content>
+            </TitledPane>
+            <TitledPane animated="false" text="Guess Information">
+               <content>
+                  <VBox>
+                     <children>
+                        <GridPane vgap="5.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="155.0" prefWidth="155.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <children>
+                              <Label text="Guess:" />
+                              <Label fx:id="networkGuessLabel" text="temp" GridPane.columnIndex="1" />
+                              <Label text="Target:" GridPane.rowIndex="1" />
+                              <Label fx:id="numberValueLabelCopy" text="temp" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label text="Error:" GridPane.rowIndex="2" />
+                              <Label fx:id="networkErrorLabel" text="temp" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </VBox>
+               </content>
+            </TitledPane>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
